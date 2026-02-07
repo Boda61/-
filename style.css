@@ -172,3 +172,56 @@ body {
 .hidden {
   display: none;
 }
+/* New Gallery */
+#newGallery {
+  max-width: 800px;        /* أقصى عرض للصور */
+  margin: 50px auto;       /* مسافة من فوق ومن الأسفل + توسيط */
+  padding: 0 20px;         /* مسافة صغيرة من الجوانب */
+  display: flex;
+  flex-direction: column;  /* الصور تحت بعض */
+  align-items: center;
+  gap: 25px;               /* مسافة بين الصور */
+}
+
+#newGallery h2 {
+  font-size: 36px;
+  color: #e63946;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: 'Cairo', sans-serif; /* خط جميل للفون */
+}
+
+#newGallery img {
+  width: 100%;             /* عشان تتناسب مع الموبايل والفون */
+  max-width: 600px;        /* الحد الأقصى لحجم الصورة */
+  border-radius: 20px;     /* حواف دائرية جميلة */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* ظل جميل */
+  object-fit: cover;       /* الحفاظ على أبعاد الصورة */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* تأثير hover لو حابب */
+#newGallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+/* Responsive للموبايل والفون */
+@media screen and (max-width: 480px) {
+  #newGallery h2 {
+    font-size: 28px;
+  }
+  #newGallery img {
+    max-width: 90%;
+    border-radius: 15px;
+  }
+}
+#newGallery {
+  display: none; /* مخفية قبل إدخال الباسورد */
+}
+#newGallery.show {
+  display: flex; /* تظهر بعد إدخال الباسورد */
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}

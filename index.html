@@ -1,29 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title> يلا بينااا ❤️</title>
+<meta charset="UTF-8">
+<title>يلا بينااا ❤️</title>
 
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+<!-- GSAP -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
-<!-- Floating Hearts -->
-<div class="hearts"></div>
-
-<!-- HERO -->
+<!-- Hero Video -->
 <section class="hero">
-  <!-- فيديو خلفية -->
   <video autoplay muted loop class="hero-video">
     <source src="HERO.mp4" type="video/mp4">
-    Your browser does not support the video tag.
   </video>
-
-  <!-- النصوص فوق الفيديو -->
   <div class="hero-content">
     <h1 data-aos="zoom-in">المطرطشين ❤️</h1>
     <p data-aos="fade-up">Some stories are written by destiny… ours is written by Family</p>
@@ -31,59 +28,98 @@
   </div>
 </section>
 
-
-<!-- MESSAGE -->
+<!-- Message -->
 <section class="message" data-aos="fade-up">
-  <h2> صد رد</h2>
+  <h2>صد رد</h2>
   <p>
-    A name that holds a world of love and memories.  
+    A name that holds a world of love and memories.<br>
     From the moment we met, it was clear that our connection was something special.
   </p>
 </section>
 
-<!-- GALLERY -->
+<!-- Gallery -->
 <section class="gallery">
   <img src="صوره1.jpeg" data-aos="zoom-in">
   <img src="صوره2.jpeg" data-aos="zoom-in" data-aos-delay="150">
   <img src="صوره3.jpeg" data-aos="zoom-in" data-aos-delay="300">
 </section>
 
-<!-- SECRET -->
+<!-- Secret Section -->
 <section class="secret" id="secret">
   <h2 data-aos="fade-up">Secret Surprise 🔐</h2>
-
   <input type="password" id="password" placeholder="Enter our special date">
   <button onclick="unlockLove()">Unlock</button>
-
   <p id="error"></p>
-
-  <div id="surprise" class="hidden">
-    <p class="final-text">
-      This song…  
-      Every word in it feels like you ❤️
-    </p>
-
-    <audio id="song" src="موسيقي.mp3"></audio>
-  </div>
 </section>
-<!-- LOVE POPUP -->
-<div id="lovePopup" class="love-popup hidden">
-  <div class="love-popup-content">
-    <h2>المطرطشين</h2>
-    <p>
-#يلا بينا
-    </p>
-    <button onclick="closePopup()">Close</button>
-  </div>
-</div>
 
-<!-- AOS -->
+<!-- New Gallery - initially hidden -->
+<section class="gallery" id="newGallery">
+  <h2 data-aos="fade-up">ذكرياتنا ❤️</h2>
+
+  <img src="صوره5.jpeg" data-aos="fade-up">
+  <img src="صوره4.jpeg" data-aos="fade-up" data-aos-delay="150">
+  <img src="صوره6.jpeg" data-aos="fade-up" data-aos-delay="300">
+  <img src="صوره7.jpeg" data-aos="fade-up" data-aos-delay="450">
+
+  <img src="صوره8.jpeg" data-aos="fade-up" data-aos-delay="600">
+  <img src="صوره9.jpeg" data-aos="fade-up" data-aos-delay="750">
+  <img src="صوره10.jpeg" data-aos="fade-up" data-aos-delay="900">
+  <img src="صوره11.jpeg" data-aos="fade-up" data-aos-delay="1050">
+  <img src="صوره12.jpeg" data-aos="fade-up" data-aos-delay="1200">
+  <img src="صوره13.jpeg" data-aos="fade-up" data-aos-delay="1350">
+  <img src="صوره14.jpeg" data-aos="fade-up" data-aos-delay="1500">
+  <img src="صوره15.jpeg" data-aos="fade-up" data-aos-delay="1650">
+  <img src="صوره16.jpeg" data-aos="fade-up" data-aos-delay="1800">
+  <img src="صوره17.jpeg" data-aos="fade-up" data-aos-delay="1950">
+  
+</section>
+
+<!-- Music -->
+<audio id="song" src="موسيقي.mp3"></audio>
+
+<!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({ duration: 1200 });</script>
+<script>
+AOS.init({ duration: 1200 });
 
-<!-- JS -->
-<script src="script.js"></script>
+function scrollDown(){
+  document.getElementById("secret").scrollIntoView({behavior:"smooth"});
+}
 
+function unlockLove() {
+  const passwordInput = document.getElementById("password").value;
+  const correctPassword = "EYE"; // ضع الباسورد الصح
+
+  if(passwordInput === correctPassword){
+    document.getElementById("error").innerText = "";
+
+    // Hide secret section
+    document.getElementById("secret").classList.add("hidden");
+
+    // Show new gallery
+    const gallery = document.getElementById("newGallery");
+    gallery.classList.add("show");
+
+    // إعادة تهيئة AOS لتفعيل الأنيميشن على الصور الجديدة
+    AOS.refreshHard();
+
+    // Play music automatically with fade in
+    const song = document.getElementById("song");
+    song.volume = 0;
+    song.play().catch(()=>{});
+    let vol = 0;
+    let fade = setInterval(()=>{
+      if(vol < 1){ vol += 0.03; song.volume = vol; }
+      else{ clearInterval(fade); }
+    },200);
+
+    // Scroll to gallery
+    gallery.scrollIntoView({behavior:"smooth"});
+
+  } else {
+    document.getElementById("error").innerText = "Wrong date 💔";
+  }
+}
+</script>
 </body>
 </html>
-
